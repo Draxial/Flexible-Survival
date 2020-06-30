@@ -1,9 +1,13 @@
-Version 2 of Killer Whale by Stripes begins here.
+Version 3 of Killer Whale by Stripes begins here.
 [Version 2 - Sex update written by Blue Bishop w/assistance and coding by Stripes]
 [Adaptation for Flexible Survival by Stripes]
 
 [This monster was translated from the multiplayer game automatically by Nuku Valente, but may, most likely, have been written by someone else.]
 [This monster was updated and converted to a more readable format by Stripes. All sexual encounters from MP MUD have been rewritten to fit the game better, all credit to creature idea goes to original author!]
+
+[Version 3 - Code update and better flexibility on menus by github.com/Draxial .]
+[Made the scene of orca receiving better, removed some random interactions.]
+
 
 "Adds Killer Whale to Flexible Survival."
 
@@ -14,12 +18,14 @@ Section 1 - Creature Responses
 
 to say orcadesc:
 	setmongender 3; [creature is male]
+	project the Figure of Orca_icon;
 	say "     Looking over the killer whale, his body is covered in the distinctive patterning of an orca on thick, sleek flesh. His head is sleek and streamlined, drawing to a blunt, rounded muzzle. His mouth is filled with small, sharp, dagger-like teeth. The blowhole on the top of his head occasionally opens to take a breath. His body is large and heavily muscled, but with the sleek shape of a swimmer. He stands easily ten feet tall. The large dorsal fin projecting from his back extends nearly a foot behind him in a sharp, knife-like shape. His arms are dense with sleek muscle. His hands have a thick webbing between his fingers. His legs are humanoid in appearance, thick with powerful muscle. His ass is dense with muscle, supporting a thick and very muscular tail that is four feet in length and ends in a whale's flukes. Between his powerful swimmer's legs he has a titanic, sleek and curving cetacean cock. Beneath his impressive maleness is a large bulge, showing his swollen balls. While they would normally be internal on the oceanic creature, their apparent hugeness cannot be fully contained inside him and bulge out considerably.";
 
 to say losetoorca:
 	if inasituation is true:
 		stop the action; [text taken care of at the source]
 	else:
+		project the Figure of Orca_Erect_icon;
 		if HP of Player > 0:
 			say "     Not wanting to fight, you immediately drop to your knees and let the Killer Whale advance upon you. Grabbing hold of you, you're given a clear view of the beast's long, curving cock as it commences the ritual of relinquishing itself from its beleaguered confines. 'Suck it!' he orders to you in a deep, rumbling command. ";
 		else:
@@ -80,30 +86,49 @@ to say beattheorca:
 	if inasituation is true:
 		stop the action; [text taken care of at the source]
 	else:
-		if ( Libido of Player - humanity of Player > 15 ) and BodyName of Player is "Killer Whale" and player is not neuter:
+		project the Figure of Orca_Erect_icon;
+		say "Would you like to have some fun with the defeated male orca?";
+		if Player consents:  [( Libido of Player - humanity of Player > 15 ) [and BodyName of Player is "Killer Whale"] and player is not neuter:]
 			if Player is herm and anallevel > 1:
-				say "     Having beaten your foe, the heat of battle has gotten your blood pumping and your lustful orca instincts come to the fore.";
+				say "[lustorcavicsex]";
 				say "     [bold type]Being dual-gendered, does your male or female aspect take over to dominate this fallen male?[roman type][line break]";
 				LineBreak;
 				say "     ([link]Y[as]y[end link]) - Male.";
 				say "     ([link]N[as]n[end link]) - Female.";
 				if Player consents:
 					say "[orcavicsex1]";
-				else if Player is female:
-					say "[orcavicsex2]";
 				else:
-					say "     Defeating the orca, you leave his exhausted form floating on the water. You're sure he'll be fine, but you feel ill-inclined to be around when he does recover.";
+					say "[orcavicsex2]";
+			else if Player is male and anallevel > 1:
+				say "[lustorcavicsex][line break]";
+				say "[orcavicsex1]";
+			else if Player is female:
+				say "[lustorcavicsex][line break]";
+				say "[orcavicsex2]";
 			else:
 				say "     Defeating the orca, you leave his exhausted form floating on the water. You're sure he'll be fine, but you feel ill-inclined to be around when he does recover.";
 
-
+to say lustorcavicsex:
+	say "     Having beaten your foe, the heat of battle has gotten your blood pumping and your lustful orca instincts come to the fore.";
 
 to say orcavicsex1:
-	say "     Victorious against the muscular orca, you find your better senses ill-equipped to handle your more feral needs. Too weak to challenge your strength any further, you pull the male into a headlock. Intent on asserting your dominance, you grind your throbbing [CockName of Player] cock against his ass, pushing it under his tail. The beast can only impotently struggle as you tease his tailhole with the tip of your [cock size desc of Player] rod before you ram it into the vulnerable portal, your victim's moans his only reply.";
-	say "     Pumping your organ into him with assertive determination, you sate your lust by making an example of this lesser male and confirm your claim on this territory. Roughly abusing the orca's hole, his own lust betrays him, moaning audibly as the sheer force of your thrusts brings him to cum in the sand. The tight clenching of his abused hole enough to bring you to your own orgasm, [one of]flooding his bowels with your thick seed[or]pulling out just before to spend your seed across his back[at random]. Relinquishing him, you punctuate your violation with a hard swat on the killer whale's abused rump before he takes off. Satisfied after reasserting your territory by humiliating the muscular beast, you depart back from whence you came.";
-	increase orcadom by 1;
+	say "     Victorious against the muscular orca, you find your better senses ill-equipped to handle your more feral needs. Too weak to challenge your strength any further, you pull the male into a headlock. Intent on asserting your dominance, you decide to punish the orca right there. You violently lift his tail up, putting it over your shoulder and start to grind your throbbing [CockName of Player] cock against his ass, pushing under his tail. The beast can only impotently struggle as you tease his tailhole with the tip of your [cock size desc of Player] rod. 'B-but I'm a virg-!' is his only reply. You interrupt and instantly reply with action instead of saying anything, ramming into the vulnerable portal, and your victim only replies with a 'nnngh..!'";
 	CreatureSexAftermath "Killer Whale" receives "AssFuck" from "Player";
-
+	say "     Pumping your organ into him with assertive determination, you sate your lust by making an example of this lesser male and confirm your claim on this territory. He tries to fight back, but with your interlock and his weakened state, the only thing he can do is struggle and moan.";
+	say "     After a while of dicking, you're not sure if he is enjoying being immobilized by you or starting to like to take cock up his ass, or both, but the orca is now a moaning shamble, his own shaft pulsing, leaking pre in front of him, with each thrust. ";
+	say "     Finally, without warning, with the rough abusing of the orca's hole and the sheer force of your thrusts, his own lust betrays him and brings the cetacean to let out an audible and long moan as he start to release his virile seed right there in the sand. Were you not holding him, he'd have fallen in the sand with so much pleasure in his backdoor. Alas, you feel the familiar pressure on your groins. Do you release inside him?";
+	LineBreak;
+	if Player consents:
+		say "     You pull the orca back and this angles his shaft even higher, and he continues to spray his own seed all over his face instead for more humiliation. You push your hips forward, plunging your [CockName of Player] cock deep inside him, [if Player is knotted]tying him[else]to the hilt[end if]. With each orgasmic contraction not only his abused hole clenches but also he lets a short, higher pitched moan with each.";
+		say "     This tight and pleasurable sensation and the display of this big bulky male even being a virgin, enjoying his first time so much, brings you to your own orgasm, and you begin flooding his bowels with your own thick seed as he continues to spray his own face, while the orca invonluntarily keeps milking you with his twitching tailhole.";
+		say "     You finally pull out after having an great deflowering experience from the orca.";
+		now tempnum is 1;
+	else:
+		say "     You pull your [CockName of Player] cock out of the male orca, just before cumming, undo the interlock and push him forwards. He falls on his own mess and you add to his predicament, spending your seed across his back. It's better to make him an example and paint him with your seed instead, after defying you. Leaving your spunk's smell all over his back should be enough humiliation for him.";
+		now tempnum is 0;
+	LineBreak;
+	say "     For a long time, anyone who would come close to this male orca would smell your spunk from close, even if after he cleaned himself. A quick tail lift and a peek on his tailhole would show that he is not a virgin anymore after your rough ordeal on him. [if tempnum is 1]Relinquishing him[else]As he slowly gets up from his mess[end if], you punctuate your violation with a hard swat on the killer whale's abused rump sending him off, [if tempnum is 1]visibly leaking your fluids from his tailhole with each step[else]with his back visibly drenched in your cum as it glistens with the light of the sun.[end if]. Satisfied after reasserting your territory by humiliating the muscular beast, you depart back from whence you came.";
+	increase orcadom by 1;
 
 to say orcavicsex2:
 	say "     Victorious against the muscular orca, you find your better senses ill-equipped to handle your more feral needs. Too weak to challenge your strength any further, you pin the male to the ground. Amused by the male's physical inadequacy, you can be sure he'll be useful for at least one thing, stroking the whale's meaty rod until it is sufficiently hard. Only briefly teasing the beleaguered beast with the entrance of your [bodytype of Player] cunt, you skip the foreplay and jump straight to impaling yourself with that cetacean cock, your victim's moans his only reply.";
